@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+:root {
+  --clr-red: hsl(0, 100%, 74%);
+  --clr-reen: hsl(154, 59%, 51%);
+  --clr-blue: hsl(248, 32%, 49%);
+  --clr-dark-blue: hsl(249, 10%, 26%);
+  --grayish-lue: hsl(246, 25%, 77%);
+
+  --clr-bg: var(--clr-red);
+  --fw-4: 400;
+  --fw-5: 500;
+  --fw-6: 600;
+  --fw-7: 700;
+
+  --fs-xs : 0.75rem;
+  --fs-sm: 0.875rem
+  --fs-base: 1rem;
+  --fs-lg: 1.5rem;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--clr-bg);
+  background-image: url("./bg-intro-mobile.png");
+  background-repeat: repeat-y;
+}
+
+@media (min-width: 400px) {
+  body {
+    background-repeat: repeat-x;
+  }
+}

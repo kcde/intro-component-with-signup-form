@@ -27,4 +27,6 @@ coverage
 *.sln
 *.sw?
 
-design
+/design/desktop-design.jpg
+/design/mobile-design.jpg
+/design/active-states.jpg
