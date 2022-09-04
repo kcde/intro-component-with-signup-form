@@ -1,35 +1,123 @@
-@import "./base.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+:root {
+  --clr-white: #ffffff;
+  --clr-red: hsl(0, 100%, 74%);
+  --clr-green: hsl(154, 59%, 51%);
+  --clr-blue: hsl(248, 32%, 49%);
+  --clr-dark-blue: 62, 60, 73;
+  --clr-grayish-blue: hsl(246, 25%, 77%);
+  --banner-bg: var(--clr-blue);
+  --clr-bg: var(--clr-red);
+  --clr-input-border: var(--clr-grayish-blue);
+  --clr-link: var(--clr-red);
+  --bg-submit-btn: var(--clr-green);
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  --fw-4: 400;
+  --fw-5: 500;
+  --fw-6: 600;
+  --fw-7: 700;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
 
-  font-weight: normal;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.5rem;
 }
 
-a,
-.green {
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h1 {
+  line-height: 1.2;
+}
+
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  color: inherit;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--clr-bg);
+  background-image: url("./bg-intro-mobile.png");
+  background-repeat: repeat-y;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 400px) {
+  body {
+    background-repeat: repeat-x;
   }
 }
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
-    place-items: center;
-  }
+    background-image: url("./bg-intro-desktop.png");
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    /* background-repeat: repeat-x; */
   }
 }
