@@ -121,6 +121,15 @@ export default {
       console.log(this.lastName);
       console.log(this.email);
       console.log("*".repeat(this.password.length));
+
+      this.resetForm();
+    },
+
+    resetForm() {
+      this.firstName = "";
+      this.lastName = "";
+      this.email = "";
+      this.password = "";
     },
   },
 

@@ -8,6 +8,7 @@
           @blur="$emit('validate-input')"
           @input="$emit('update:modelValue', $event.target.value)"
           @focus="$emit('modifying-input')"
+          :value="modelValue"
         />
       </label>
 
