@@ -127,9 +127,11 @@ export default {
 
     resetForm() {
       this.firstName = "";
-      this.lastName = "";
-      this.email = "";
+      (this.isFirstNameValid = null), (this.lastName = "");
+      (this.isLastNameValid = null), (this.email = "");
+      this.isEmailValid = null;
       this.password = "";
+      this.isPasswordValid = null;
     },
   },
 
