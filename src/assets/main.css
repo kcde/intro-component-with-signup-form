@@ -11,6 +11,7 @@
   --clr-input-border: var(--clr-grayish-blue);
   --clr-link: var(--clr-red);
   --bg-submit-btn: var(--clr-green);
+  --clr-input: rgb(var(--clr-dark-blue));
 
   --fw-4: 400;
   --fw-5: 500;
@@ -110,7 +111,7 @@ body {
 
 @media (min-width: 400px) {
   body {
-    background-repeat: repeat-x;
+    background-repeat: repeat;
   }
 }
 

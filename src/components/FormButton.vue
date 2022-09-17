@@ -16,11 +16,15 @@ button {
   font-weight: 500;
   border-radius: var(--radius-md);
   box-shadow: inset 0 -4px rgba(var(--clr-dark-blue), 0.2);
-  transition: background-color 150ms ease-out;
+  transition: background-color 150ms ease-out, box-shadow 50ms ease-in;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(var(--bg-submit-btn), 0.6);
+  }
+  &:active {
+    box-shadow: none;
+    transform: translateY(4px);
   }
 }
 </style>

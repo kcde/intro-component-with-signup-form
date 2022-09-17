@@ -1,13 +1,27 @@
 <template>
-  <div class="input-container">
-    <label>
-      <input :type="type" :placeholder="placeholder" />
-    </label>
+  <div class="input-body">
+    <div class="input-container" :class="{ 'input-error': error === false }">
+      <label>
+        <input
+          :type="type"
+          :placeholder="placeholder"
+          @blur="$emit('validate-input')"
+          @input="$emit('update:modelValue', $event.target.value)"
+          @focus="$emit('modifying-input')"
+        />
+      </label>
+
+      <div class="error-icon" v-show="error === false">
+        <img src="../assets/icon-error.svg" alt="input error icon" />
+      </div>
+    </div>
+    <p v-show="error === false" class="error-message">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script>
 export default {
+  emits: ["validate-input", "update:modelValue", "modifying-input"],
   props: {
     type: {
       type: String,
@@ -15,6 +29,20 @@ export default {
     },
     placeholder: {
       type: String,
+    },
+    modelValue: {
+      type: String,
+    },
+    error: {
+      type: Boolean,
+    },
+    errorMessage: {
+      type: String,
+    },
+  },
+  methods: {
+    log(val) {
+      console.log(val);
     },
   },
 };
@@ -28,6 +56,7 @@ input {
   background-color: transparent;
   font-weight: 600;
   caret-color: var(--clr-blue);
+  color: var(--clr-input);
   &:focus {
     outline: none;
   }
@@ -51,5 +80,32 @@ label {
   &:focus-within {
     border-color: var(--clr-blue);
   }
+}
+
+.input-error {
+  --clr-input-border: var(--clr-red);
+  --clr-input: var(--clr-red);
+}
+
+.input-container.input-error {
+  border-width: 2px;
+  &:focus-within {
+    border-color: var(--clr-input);
+  }
+}
+
+.error-message {
+  color: var(--clr-red);
+  font-size: 10px;
+  font-weight: 600;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.error-icon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
