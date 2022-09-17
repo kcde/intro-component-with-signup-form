@@ -17,10 +17,26 @@
         :error-message="lastNameErrorMessage"
         @modifying-input="tempRemoveError('isLastNameValid')"
       />
-      <BaseInput placeholder="Email Address" type="email" />
-      <BaseInput placeholder="Password" type="password" />
+      <BaseInput
+        placeholder="Email Address"
+        @validate-input="validateEmail"
+        type="email"
+        v-model="email"
+        :error-message="emailErrorMessage"
+        :error="isEmailValid"
+        @modifying-input="tempRemoveError('isEmailValid')"
+      />
+      <BaseInput
+        placeholder="Password"
+        type="password"
+        @validate-input="validatePassword"
+        v-model="password"
+        :error="isPasswordValid"
+        :error-message="passwordErrorMessage"
+        @modifying-input="tempRemoveError('isPasswordValid')"
+      />
 
-      <FormButton @click="submitForm" />
+      <FormButton @click="submitForm" :disabled="!isFormValid" />
     </form>
 
     <div class="form__footer">
@@ -41,10 +57,17 @@ export default {
     return {
       firstName: "",
       lastName: "",
+      email: "",
+      password: "",
       isFirstNameValid: null,
       isLastNameValid: null,
+      isEmailValid: null,
+      isPasswordValid: null,
+
       firstNameErrorMessage: "",
       lastNameErrorMessage: "",
+      emailErrorMessage: "",
+      passwordErrorMessage: "",
     };
   },
   methods: {
@@ -66,16 +89,52 @@ export default {
 
       this.isLastNameValid = true;
     },
+    validateEmail() {
+      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        this.isEmailValid = true;
+
+        return true;
+      }
+      this.isEmailValid = false;
+      this.emailErrorMessage = "Looks like this is not an email";
+
+      return false;
+    },
+
+    validatePassword() {
+      if (this.password.trim() === "") {
+        this.isPasswordValid = false;
+        this.passwordErrorMessage = "Password cannot be empty";
+        return;
+      }
+      this.isPasswordValid = true;
+    },
 
     tempRemoveError(val) {
       this[val] = true;
-
-      console.log(this.isFirstNameValid);
-      console.log(this.isFirstNameValid);
     },
 
     submitForm() {
+      console.log("submitting form.........");
+
       console.log(this.firstName);
+      console.log(this.lastName);
+      console.log(this.email);
+      console.log("*".repeat(this.password.length));
+    },
+  },
+
+  computed: {
+    isFormValid() {
+      if (
+        this.isLastNameValid &&
+        this.isFirstNameValid &&
+        this.isEmailValid & this.isPasswordValid
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

@@ -1,5 +1,7 @@
 <template>
-  <button type="submit">claim your free trial</button>
+  <button type="submit" :disabled="$attrs.disabled">
+    claim your free trial
+  </button>
 </template>
 
 <script>
@@ -25,6 +27,14 @@ button {
   &:active {
     box-shadow: none;
     transform: translateY(4px);
+  }
+  &:disabled {
+    background-color: rgba(var(--bg-submit-btn), 0.6);
+    cursor: not-allowed;
+    &:active {
+      transform: translateY(0);
+      box-shadow: inset 0 -4px rgba(var(--clr-dark-blue), 0.2);
+    }
   }
 }
 </style>
