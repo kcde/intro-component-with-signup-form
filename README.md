@@ -1,8 +1,12 @@
 # intro_with_form
 
 
+
+
 ![Design preview for the Intro component with sign up form coding challenge](./design/desktop-preview.jpg)
 
+
+Simple form landing page with Vue and custom form validation
 
 ## Project Setup
 
