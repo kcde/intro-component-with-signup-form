@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { checkEmaiil, createUser } from "../../utils/http";
 import BaseInput from "../BaseInput.vue";
 import FormButton from "../FormButton.vue";
 export default {
@@ -71,6 +72,12 @@ export default {
     };
   },
   methods: {
+    async checkEmailAvailability(email) {
+      const res = await checkEmaiil(email);
+      const isAvailable = await res.json();
+      return isAvailable.error ? true : false;
+    },
+
     validateFirstName() {
       if (this.firstName.trim() === "") {
         this.isFirstNameValid = false;
@@ -89,11 +96,19 @@ export default {
 
       this.isLastNameValid = true;
     },
-    validateEmail() {
+    async validateEmail() {
       if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-        this.isEmailValid = true;
+        const isEmailAvailable = await this.checkEmailAvailability(this.email);
 
-        return true;
+        if (isEmailAvailable) {
+          this.isEmailValid = true;
+          return true;
+        } else {
+          this.isEmailValid = false;
+
+          this.emailErrorMessage = "Looks like this  email is taken";
+          return false;
+        }
       }
       this.isEmailValid = false;
       this.emailErrorMessage = "Looks like this is not an email";
@@ -114,15 +129,30 @@ export default {
       this[val] = true;
     },
 
-    submitForm() {
+    async submitForm() {
       console.log("submitting form.........");
+      const user = {
+        fname: this.firstName,
+        lname: this.lastName,
+        email: this.email,
+        password: this.password,
+      };
 
-      console.log(this.firstName);
-      console.log(this.lastName);
-      console.log(this.email);
-      console.log("*".repeat(this.password.length));
+      try {
+        const req = await createUser(user);
+        const res = await req.json();
+        if (res.error) {
+          window.alert(res.error);
+          return;
+        }
 
-      this.resetForm();
+        window.alert("user created");
+        this.resetForm();
+      } catch (error) {
+        console.log(error);
+
+        window.alert("unable to create user");
+      }
     },
 
     resetForm() {
